@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.udacity.asteroidradar.PictureOfDay
+import com.udacity.asteroidradar.api.PictureOfDay
 import com.udacity.asteroidradar.api.PictureApi
-import com.udacity.asteroidradar.api.PictureOfDayApiService
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
