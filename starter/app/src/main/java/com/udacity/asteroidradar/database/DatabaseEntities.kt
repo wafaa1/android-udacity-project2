@@ -3,9 +3,11 @@ package com.udacity.asteroidradar.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.udacity.asteroidradar.Asteroid
+
 
 @Entity(tableName = "asteroids_radar_table")
-data class Asteroids (
+data class DatabaseAsteroid (
 
     @PrimaryKey
     val id: Long = 0L,
@@ -45,6 +47,24 @@ data class DistanceFromEarth(
     val astronomical: Double
 )
 
+/**
+ * converts from database objects to domain objects
+ */
+//fun List<DatabaseAsteroid>.asDomainModel(): List<Asteroid> {
+//    return map {
+//        Asteroid(
+//            id = it.id,
+//            codename = it.codename,
+//            closeApproachDate = it.closeApproachDataList,
+//            absoluteMagnitude = it.absoluteMagnitude,
+//            estimatedDiameter = it.estimatedDiameter,
+//            relativeVelocity = it.relativeVelocity,
+//            distanceFromEarth = it.distanceFromEarth,
+//            isPotentiallyHazardous = it.isPotentiallyHazardous
+//        )
+//    }
+//}
+
 //(id, codename, formattedDate, absoluteMagnitude,
 //estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous)
 
@@ -59,19 +79,4 @@ close_approach_data -> relative_velocity -> kilometers_per_second
 close_approach_data -> miss_distance -> astronomical
 */
 
-//
-//    /**
-//     * converts from database objects to domain objects
-//     */
-//    fun List<DatabaseAstroids>.asDomainModel(): List<Asteroids> {
-//        return map {
-//            Asteroids(
-//                url = it.url,
-//                title = it.title,
-//                description = it.description,
-//                updated = it.updated,
-//                thumbnail = it.thumbnail
-//            )
-//        }
-//    }
 

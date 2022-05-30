@@ -50,7 +50,7 @@ fun bindImage(imgView: View, imgUrl: String?){
 }
 
 
-///////////////
+/////////////////
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
@@ -65,19 +65,19 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     }
 }
 
-@BindingAdapter("marsApiStatus")
-fun bindStatus(statusImageView: ImageView, status: MainViewModel.PictureOfDayStatus?) {
-    when (status) {
-        MainViewModel.PictureOfDayStatus.LOADING -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.loading_animation)
-        }
-        MainViewModel.PictureOfDayStatus.ERROR -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.ic_connection_error)
-        }
-        MainViewModel.PictureOfDayStatus.DONE -> {
-            statusImageView.visibility = View.GONE
-        }
-    }
-}
+//@BindingAdapter("marsApiStatus")
+//fun bindStatus(statusImageView: ImageView, status: MainViewModel.PictureOfDayStatus?) {
+//    when (status) {
+//        MainViewModel.PictureOfDayStatus.LOADING -> {
+//            statusImageView.visibility = View.VISIBLE
+//            statusImageView.setImageResource(R.drawable.loading_animation)
+//        }
+//        MainViewModel.PictureOfDayStatus.ERROR -> {
+//            statusImageView.visibility = View.VISIBLE
+//            statusImageView.setImageResource(R.drawable.ic_connection_error)
+//        }
+//        MainViewModel.PictureOfDayStatus.DONE -> {
+//            statusImageView.visibility = View.GONE
+//        }
+//    }
+//}

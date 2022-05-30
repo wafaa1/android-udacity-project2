@@ -5,11 +5,11 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import com.udacity.asteroidradar.Constants.POD_ENDPOINT
+import com.udacity.asteroidradar.Constants.BASE_URL
+import com.udacity.asteroidradar.database.PictureOfDay
 
 //private const val BASE_URL = "https://api.nasa.gov/planetary/apod?api_key=YOUR_API_KEY"
-//private const val IMAGE_URL = "https://api.nasa.gov/planetary/apod?api_key=VCknWcf7SocNnq9cuk5J25r1CDvdrtMV9YzdDEKF"
-private const val IMAGE_URL = "https://api.nasa.gov/planetary/"
-private const val API_KEY = "VCknWcf7SocNnq9cuk5J25r1CDvdrtMV9YzdDEKF"
 
 // Moshi
 private val moshi = Moshi.Builder()
@@ -18,11 +18,11 @@ private val moshi = Moshi.Builder()
 
 private val retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .baseUrl(IMAGE_URL)
+        .baseUrl(BASE_URL)
         .build()
 
 interface PictureOfDayApiService {
-        @GET("apod?api_key=VCknWcf7SocNnq9cuk5J25r1CDvdrtMV9YzdDEKF")
+        @GET(POD_ENDPOINT)//apod?api_key=VCknWcf7SocNnq9cuk5J25r1CDvdrtMV9YzdDEKE")
         suspend fun getPictureOfDay(): PictureOfDay
     }
 

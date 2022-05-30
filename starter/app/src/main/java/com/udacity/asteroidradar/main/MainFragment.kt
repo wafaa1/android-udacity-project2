@@ -30,6 +30,7 @@ class MainFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    //TODO to use for selecting dates/weekly/... options
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return true
     }
