@@ -30,7 +30,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             _status.value = PictureOfDayStatus.LOADING
             try {
-                _pictureOfDay.value = PictureApi.retrofitService.getPictureOfDay()
+                _pictureOfDay.value = PictureApi.apod.getPictureOfDay()
                 _status.value = PictureOfDayStatus.DONE
             } catch (e: Exception) {
                 _status.value = PictureOfDayStatus.ERROR
