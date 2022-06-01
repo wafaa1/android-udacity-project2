@@ -12,7 +12,7 @@ import androidx.room.RoomDatabase
 //        @Volatile
 //        private var INSTANCE  : AsteroidsDatabase? = null
 //
-//        fun getInstance(context: Context) : AsteeroidsDatabase {
+//        fun getInstance(context: Context) : AsteroidsDatabase {
 //            synchronized(this) {
 //                var instance = INSTANCE
 //
