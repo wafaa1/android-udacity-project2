@@ -31,6 +31,6 @@ interface AsteroidDao {
     fun getAsteroidsForWeek(today: String, weekAfter: String): LiveData<List<DatabaseAsteroid>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllAsteroids(asteroids: List<Asteroid>)
+    suspend fun insertAllAsteroids(asteroids: List<DatabaseAsteroid>)
 
 }
