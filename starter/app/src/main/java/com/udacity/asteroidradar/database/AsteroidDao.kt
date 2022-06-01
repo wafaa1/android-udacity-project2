@@ -10,7 +10,7 @@ import com.udacity.asteroidradar.Asteroid
 @Dao
 interface AsteroidDao {
     @Query("select * from asteroids_radar_table ORDER BY id DESC")
-    fun getAstroids(): LiveData<List<DatabaseAsteroid>>
+    fun getAsteroids(): LiveData<List<DatabaseAsteroid>>
 
     @Insert(onConflict= OnConflictStrategy.REPLACE)
     fun insertAll(vararg asteroids: List<DatabaseAsteroid>)

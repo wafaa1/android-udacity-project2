@@ -9,7 +9,9 @@ import com.udacity.asteroidradar.Constants.POD_ENDPOINT
 import com.udacity.asteroidradar.Constants.BASE_URL
 import com.udacity.asteroidradar.database.PictureOfDay
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import retrofit2.http.Query
 
+private const val myNasaApiKey="VCknWcf7SocNnq9cuk5J25r1CDvdrtMV9YzdDEKF"
 //private const val BASE_URL = "https://api.nasa.gov/planetary/apod?api_key=YOUR_API_KEY"
 
 // Moshi
@@ -28,9 +30,9 @@ private val retrofit_Moshi = Retrofit.Builder()
     .build()
 
 interface PictureOfDayApiService {
-        @GET(POD_ENDPOINT)//apod?api_key=MYAPIKEY")
-        suspend fun getPictureOfDay(): PictureOfDay
-    } // https://stackoverflow.com/questions/26177749/how-can-i-append-a-query-parameter-to-an-existing-url
+    @GET(POD_ENDPOINT)
+    suspend fun getPictureOfDay(@Query("api_key") apiKey: String = myNasaApiKey): PictureOfDay
+}
 
 object PictureApi {
     val retrofitService : PictureOfDayApiService by lazy {
