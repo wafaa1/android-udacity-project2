@@ -9,28 +9,27 @@ import com.udacity.asteroidradar.Asteroid
 
 @Dao
 interface AsteroidDao {
-    @Query("select * from asteroids_radar_table ORDER BY id DESC")
+    @Query("select * from asteroids_radar_table ORDER BY close_approach_date ASC")
     fun getAsteroids(): LiveData<List<DatabaseAsteroid>>
 
-    //@Insert(onConflict= OnConflictStrategy.REPLACE)
-    //fun insertAll(vararg asteroids: List<DatabaseAsteroid>)
-
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg asteroids: DatabaseAsteroid)
+    suspend fun insertAll(vararg asteroids: DatabaseAsteroid)
+
+    //delete all before today
+    @Query("DELETE FROM asteroids_radar_table WHERE close_approach_date < :today")
+    suspend fun clear(today: String)
+
+    //query for next seven days
+    @Query("SELECT * FROM asteroids_radar_table WHERE close_approach_date BETWEEN :startDay AND :weekAfter ORDER BY close_approach_date ASC")
+    fun getAsteroidsForWeek(startDay: String, weekAfter: String): LiveData<List<DatabaseAsteroid>>
 
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    suspend fun insertAllAsteroids(asteroids: List<DatabaseAsteroid>)
 
-    //TODO delete all before today
-    @Query("DELETE FROM asteroids_radar_table WHERE close_approach_date < :today")
-    suspend fun clear(today: String)
-
-    //Todo query for next seven days
-    @Query("SELECT * FROM asteroids_radar_table WHERE close_approach_date BETWEEN :today AND :weekAfter ORDER BY close_approach_date ASC")
-    fun getAsteroidsForWeek(today: String, weekAfter: String): LiveData<List<DatabaseAsteroid>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllAsteroids(asteroids: List<DatabaseAsteroid>)
+/*
+    @Query("SELECT * FROM asteroids_radar_table WHERE close_approach_date = :date")
+    fun getAsteroidsForADay(date: String): LiveData<List<DatabaseAsteroid>>
+ */
+    //todo dao for pictureOfDay
 
 }

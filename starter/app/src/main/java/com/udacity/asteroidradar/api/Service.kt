@@ -91,3 +91,12 @@ object AsteroidsApi {
 
     val asteroids = retrofit.create(AsteroidsService::class.java)
 }
+//object AsteroidApi {
+//    val retrofitService : AsteroidApiService by lazy {
+//        retrofit.create(AsteroidApiService::class.java)
+//    }
+//    val pictureOfTheDayService by lazy {
+//        retrofit.create(PictureOfTheDayService::class.java)
+//    }
+//
+//}
