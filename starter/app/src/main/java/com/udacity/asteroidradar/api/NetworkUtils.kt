@@ -3,6 +3,7 @@ package com.udacity.asteroidradar.api
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.Constants
+import com.udacity.asteroidradar.Constants.DEFAULT_END_DATE_DAYS
 import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -59,16 +60,17 @@ private fun getNextSevenDaysFormattedDates(): ArrayList<String> {
     return formattedDateList
 }
 
-/**
- * Main entry point for network access. Call like `Network.devbytes.getPlaylist()`
- */
-//object Network {
-//    // Configure retrofit to parse JSON and use coroutines
-//    private val retrofit = Retrofit.Builder()
-//        .baseUrl("https://devbytes.udacity.com/")
-//        .addConverterFactory(MoshiConverterFactory.create(moshi))
-//        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-//        .build()
-//
-//    val devbytes = retrofit.create(DevbyteService::class.java)
-//}
+fun getTodayDate(): String {
+    val calendar = Calendar.getInstance()
+    val date = calendar.time
+    val formattedDate = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT)
+    return formattedDate.format(date).toString()
+}
+
+fun getDefaultEndDate(): String{
+    val calendar = Calendar.getInstance()
+    calendar.add(Calendar.DAY_OF_YEAR, DEFAULT_END_DATE_DAYS)
+    val timeEnd = calendar.time
+    val formattedDate = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT)
+    return formattedDate.format(timeEnd).toString()
+}

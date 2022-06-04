@@ -39,7 +39,7 @@ abstract class AsteroidsDatabase : RoomDatabase() {
 
 private lateinit var INSTANCE: AsteroidsDatabase
 
-fun getDatabase(context: Context): AsteroidsDatabase {
+fun getAsteroidsDatabase(context: Context): AsteroidsDatabase {
     synchronized(AsteroidsDatabase::class.java) {
         if (!::INSTANCE.isInitialized) {
             INSTANCE = Room.databaseBuilder(context.applicationContext,
