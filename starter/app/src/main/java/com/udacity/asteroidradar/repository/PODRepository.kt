@@ -26,7 +26,7 @@ class PODRepository (private val database: PictureOfDayDatabase) {
         withContext(Dispatchers.IO) {
             val pic = PictureApi.apod.getPictureOfDay()
             database
-                .pictureOfDayDao.insertAll()
+                .pictureOfDayDao.insertAll().asDatabaseModel()
         }
     }
 
