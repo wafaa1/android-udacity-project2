@@ -35,7 +35,7 @@ data class DatabaseAsteroid constructor (
 @Parcelize
 @Entity(tableName = "picture_of_day_table")
 data class DatabasePOD constructor (
-//    @Json(name = "media_type")
+    @Json(name = "media_type")
     @ColumnInfo(name= "media_type")
     val mediaType: String,
     val title: String = "White Cosmos",
@@ -62,8 +62,8 @@ fun List<DatabaseAsteroid>.asDomainModel(): List<Asteroid> {
     }
 }
 
-fun DatabasePOD.asDomainModel() : PictureOfDay {
-    return DatabasePOD (
+fun PictureOfDay.asDomainModel() : PictureOfDay {
+    return PictureOfDay (
         mediaType = this.mediaType,
         title = this.title,
         url = this.url)
