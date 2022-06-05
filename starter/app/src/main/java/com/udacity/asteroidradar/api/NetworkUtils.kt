@@ -1,7 +1,7 @@
 package com.udacity.asteroidradar.api
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.Constants.DEFAULT_END_DATE_DAYS
 import org.json.JSONObject

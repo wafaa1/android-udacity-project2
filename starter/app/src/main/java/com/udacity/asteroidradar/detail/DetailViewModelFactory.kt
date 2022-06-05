@@ -3,7 +3,7 @@ package com.udacity.asteroidradar.detail
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.domain.Asteroid
 /**
  * Simple ViewModel factory that provides the Asteroid and context to the ViewModel.
  */

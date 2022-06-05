@@ -6,6 +6,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
+import com.udacity.asteroidradar.api.getTodayDate
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.domain.PictureOfDay
 import kotlinx.android.parcel.Parcelize
