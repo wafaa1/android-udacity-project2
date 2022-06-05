@@ -54,6 +54,8 @@ fun NetworkPODContainer.asDomainModel(): PictureOfDay {
 /**
  * Convert Network results to database objects
  */
+
+
 fun NetworkPODContainer.asDatabaseModel(): DatabasePOD {
     return DatabasePOD(
         mediaType = picOfDay.mediaType,
@@ -62,3 +64,12 @@ fun NetworkPODContainer.asDatabaseModel(): DatabasePOD {
         date = getTodayDate()
     )
 }
+//fun PictureOfDay.asDatabaseModel(): DatabasePOD {
+//    return DatabasePOD(
+//        mediaType = this.mediaType,
+//        title = this.title,
+//        url = this.url,
+//        date = Calendar.getInstance().time.toString() // pass the required date
+//    )
+//}
+

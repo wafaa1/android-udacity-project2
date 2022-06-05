@@ -10,6 +10,7 @@ import com.udacity.asteroidradar.api.getTodayDate
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.domain.PictureOfDay
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 @Parcelize
 @Entity(tableName = "asteroids_radar_table")
@@ -62,13 +63,20 @@ fun List<DatabaseAsteroid>.asDomainModel(): List<Asteroid> {
     }
 }
 
-fun PictureOfDay.asDomainModel() : PictureOfDay {
+fun DatabasePOD.asDomainModel() : PictureOfDay {
     return PictureOfDay (
         mediaType = this.mediaType,
         title = this.title,
         url = this.url)
 }
-
+fun PictureOfDay.asDatabaseModel(): DatabasePOD {
+    return DatabasePOD(
+        mediaType = this.mediaType,
+        title = this.title,
+        url = this.url,
+        date = Calendar.getInstance().time.toString() // pass the required date
+    )
+}
 
 
 //fun List<Asteroid>.asDatabaseModel(): Array<DatabaseAsteroid> {
