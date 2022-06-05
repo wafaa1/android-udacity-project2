@@ -40,8 +40,25 @@ fun NetworkAsteroidContainer.asDomainModel(): List<Asteroid> {
 /**
  * Convert Network results to database objects
  */
-fun NetworkAsteroidContainer.asDatabaseModel(): Array<DatabaseAsteroid> {
-    return asteroids.map {
+//fun NetworkAsteroidContainer.asDatabaseModel(): Array<DatabaseAsteroid> {
+//    return asteroids.map {
+//        DatabaseAsteroid(
+//            id = it.id,
+//            codename = it.codename,
+//            closeApproachDate = it.closeApproachDate,
+//            absoluteMagnitude = it.absoluteMagnitude,
+//            estimatedDiameter = it.estimatedDiameter,
+//            relativeVelocity = it.relativeVelocity,
+//            distanceFromEarth = it.distanceFromEarth,
+//            isPotentiallyHazardous = it.isPotentiallyHazardous
+//        )
+//    }.toTypedArray()
+//}
+/**
+ * Convert Network results to database objects
+ */
+fun List<Asteroid>.asDatabaseModel(): Array<DatabaseAsteroid> {
+    return map {
         DatabaseAsteroid(
             id = it.id,
             codename = it.codename,

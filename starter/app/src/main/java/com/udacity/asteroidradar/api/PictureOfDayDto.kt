@@ -16,30 +16,49 @@ data class NetworkPOD(
     val title: String,
     val url: String)
 
+///**
+// * Convert Network results to domain objects
+// */
+//fun NetworkPODContainer.asDomainModel(): PictureOfDay {
+//    return picOfDay.map {
+//        PictureOfDay(
+//            mediaType = it.mediaType,
+//            title = it.title,
+//            url = it.url
+//        )
+//    }
+//}
 /**
  * Convert Network results to domain objects
  */
 fun NetworkPODContainer.asDomainModel(): PictureOfDay {
-    return picOfDay.map {
-        PictureOfDay(
-            mediaType = it.mediaType,
-            title = it.title,
-            url = it.url
-        )
-    }
+    return PictureOfDay(
+        mediaType = picOfDay.mediaType,
+        title = picOfDay.title,
+        url = picOfDay.url
+    )
 }
-
-
+///**
+// * Convert Network results to database objects
+// */
+//fun NetworkPODContainer.asDatabaseModel(): DatabasePOD {
+//    return picOfDay.map {
+//        DatabasePOD(
+//            mediaType = it.mediaType,
+//            title = it.title,
+//            url = it.url,
+//            date = getTodayDate()
+//        )
+//    }
+//}
 /**
  * Convert Network results to database objects
  */
 fun NetworkPODContainer.asDatabaseModel(): DatabasePOD {
-    return picOfDay.map {
-        DatabasePOD(
-            mediaType = it.mediaType,
-            title = it.title,
-            url = it.url,
-            date = getTodayDate()
-        )
-    }
+    return DatabasePOD(
+        mediaType = picOfDay.mediaType,
+        title = picOfDay.title,
+        url = picOfDay.url,
+        date = getTodayDate()
+    )
 }

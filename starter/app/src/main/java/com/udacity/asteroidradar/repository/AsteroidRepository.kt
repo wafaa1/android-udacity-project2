@@ -2,11 +2,8 @@ package com.udacity.asteroidradar.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.udacity.asteroidradar.api.*
 import com.udacity.asteroidradar.domain.Asteroid
-import com.udacity.asteroidradar.api.AsteroidsApi
-import com.udacity.asteroidradar.api.getDefaultEndDate
-import com.udacity.asteroidradar.api.getTodayDate
-import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.database.AsteroidsDatabase
 import com.udacity.asteroidradar.database.asDomainModel
 import kotlinx.coroutines.Dispatchers
@@ -25,8 +22,13 @@ class AsteroidRepository (private val database: AsteroidsDatabase) {
 
     suspend fun refreshAsteroids() {
         withContext(Dispatchers.IO) {
-            val asteroidsList = AsteroidsApi.asteroids.getAsteroids(startTodayDate,endAfter7Days).await()
-            database.asteroidDao.insertAll(*asteroidsList.asDatabaseModel())
+            val asteroidsList =
+                parseAsteroidsJsonResult(JSONObject(
+                    AsteroidsApi
+                        .asteroids
+                        .getAsteroids(startTodayDate, endAfter7Days).await()))
+            database
+                .asteroidDao.insertAll(*asteroidsList.asDatabaseModel())
         }
     }
 
