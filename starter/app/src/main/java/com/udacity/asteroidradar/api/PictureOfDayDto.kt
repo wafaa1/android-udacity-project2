@@ -29,6 +29,7 @@ fun NetworkPODContainer.asDomainModel(): PictureOfDay {
     }
 }
 
+
 /**
  * Convert Network results to database objects
  */
@@ -37,7 +38,8 @@ fun NetworkPODContainer.asDatabaseModel(): DatabasePOD {
         DatabasePOD(
             mediaType = it.mediaType,
             title = it.title,
-            url = it.url
+            url = it.url,
+            date = getTodayDate()
         )
     }
 }

@@ -61,6 +61,12 @@ fun List<DatabaseAsteroid>.asDomainModel(): List<Asteroid> {
     }
 }
 
+fun DatabasePOD.asDomainModel() : PictureOfDay {
+    return DatabasePOD (
+        mediaType = this.mediaType,
+        title = this.title,
+        url = this.url)
+}
 
 
 
