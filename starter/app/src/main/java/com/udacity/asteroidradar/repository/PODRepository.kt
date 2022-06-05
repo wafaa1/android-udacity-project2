@@ -18,7 +18,9 @@ class PODRepository (private val database: PictureOfDayDatabase) {
     private val endAfter7Days = getDefaultEndDate()
 
     val pictureOfDay: LiveData<PictureOfDay> =
-        Transformations.map(database.pictureOfDayDao.getPicOfDay(getTodayDate()))
+        Transformations.map(database.pictureOfDayDao.getPicOfDay(getTodayDate())){
+            it?.asDomainModel()
+        }
 
     suspend fun refreshPictureOfDay() {
         withContext(Dispatchers.IO) {
