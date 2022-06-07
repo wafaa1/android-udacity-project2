@@ -27,8 +27,8 @@ interface AsteroidsService {
         @Query("start_date") startDate: String,
         @Query("end_date") endDate: String?,
         @Query("api_key") apiKey: String = myNasaApiKey
-//    ): String
-    ): Deferred<String>
+    ): String
+//    ): Deferred<String>
 
 }
 

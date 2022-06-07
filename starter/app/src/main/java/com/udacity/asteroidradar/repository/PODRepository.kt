@@ -29,6 +29,5 @@ class PODRepository(private val database: PictureOfDayDatabase) {
         withContext(Dispatchers.IO) {
             database.pictureOfDayDao.clearOldPOD(getTodayDate())
         }
-
     }
 }

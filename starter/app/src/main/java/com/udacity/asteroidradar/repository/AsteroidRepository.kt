@@ -23,10 +23,13 @@ class AsteroidRepository (private val database: AsteroidsDatabase) {
     suspend fun refreshAsteroids() {
         withContext(Dispatchers.IO) {
             val asteroidsList =
-                parseAsteroidsJsonResult(JSONObject(
-                    AsteroidsApi
-                        .asteroids
-                        .getAsteroids(startTodayDate, endAfter7Days).await()))
+                parseAsteroidsJsonResult(
+                    JSONObject(
+                        AsteroidsApi
+                            .asteroids
+                            .getAsteroids(startTodayDate, endAfter7Days)
+                    )
+                )
             database
                 .asteroidDao.insertAll(*asteroidsList.asDatabaseModel())
         }

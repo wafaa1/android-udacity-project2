@@ -74,22 +74,6 @@ fun PictureOfDay.asDatabaseModel(): DatabasePOD {
         mediaType = this.mediaType,
         title = this.title,
         url = this.url,
-        date = Calendar.getInstance().time.toString() // pass the required date
+        date = getTodayDate()
     )
 }
-
-
-//fun List<Asteroid>.asDatabaseModel(): Array<DatabaseAsteroid> {
-//    return map {
-//        DatabaseAsteroid(
-//            id = it.id,
-//            codename = it.codename,
-//            closeApproachDate = it.closeApproachDate,
-//            absoluteMagnitude = it.absoluteMagnitude,
-//            estimatedDiameter = it.estimatedDiameter,
-//            relativeVelocity = it.relativeVelocity,
-//            distanceFromEarth = it.distanceFromEarth,
-//            isPotentiallyHazardous = it.isPotentiallyHazardous)
-//    }.toTypedArray()
-//}
-//
