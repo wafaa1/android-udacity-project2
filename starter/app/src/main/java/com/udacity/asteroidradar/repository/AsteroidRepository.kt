@@ -26,7 +26,7 @@ class AsteroidRepository (private val database: AsteroidsDatabase) {
                 parseAsteroidsJsonResult(JSONObject(
                     AsteroidsApi
                         .asteroids
-                        .getAsteroids(startTodayDate, endAfter7Days).await()))
+                        .getAsteroids(startTodayDate, endAfter7Days)))
             database
                 .asteroidDao.insertAll(*asteroidsList.asDatabaseModel())
         }

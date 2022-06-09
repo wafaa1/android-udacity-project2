@@ -24,60 +24,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application){
 
     val asteroidsList = asteroidsRepository.asteroids
     val pictureOfDay = podRepository.pictureOfDay
+
+
+    class MainViewModelFactory(val app: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return MainViewModel(app) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
+        }
+    }
 }
-
-
-//using above code that uses repo instead
-//class MainViewModel(app: Application) : ViewModel() {
-//    enum class StatusValues { LOADING, ERROR, DONE }
-//
-//    private val _podStatus = MutableLiveData<StatusValues>()
-//    val podStatus : LiveData<StatusValues>
-//        get() = _podStatus
-//
-//    private val _pictureOfDay = MutableLiveData<PictureOfDay>()
-//    val pictureOfDay : LiveData<PictureOfDay>
-//        get() = _pictureOfDay
-//
-//    private val _asteroidsStatus = MutableLiveData<StatusValues>()
-//    val asteroidStatus : LiveData<StatusValues>
-//        get() = _asteroidsStatus
-//
-//    private val _asteroidProperties = MutableLiveData<List<Asteroid>>()
-//    val asteroidProperties : LiveData<List<Asteroid>>
-//        get() = _asteroidProperties
-//
-//    init{
-//        getPictureOfDay()
-//        getAsteroidProperties()
-//    }
-//
-//    /**
-//     * Sets the value of the status LiveData to the Picture API status.
-//     */
-//    private fun getPictureOfDay() {
-//        viewModelScope.launch {
-//            _podStatus.value = StatusValues.LOADING
-//            try {
-//                _pictureOfDay.value = PictureApi.apod.getPictureOfDay() //todo save pod in db and get from repo
-//                _podStatus.value = StatusValues.DONE
-//            } catch (e: Exception) {
-//                _podStatus.value = StatusValues.ERROR
-//            }
-//        }
-//    }
-//
-//    private fun getAsteroidProperties() {
-//        viewModelScope.launch {
-//            _asteroidsStatus.value = StatusValues.LOADING
-//            try {
-//                _asteroidProperties.value = parseAsteroidsJsonResult(AsteroidsApi.asteroids.getAsteroids())
-//                _asteroidsStatus.value = StatusValues.DONE
-//            } catch (e: Exception) {
-//                _asteroidsStatus.value = StatusValues.ERROR //e.message
-//                _asteroidProperties.value = ArrayList()
-//            }
-//        }
-//    }
-//}
-//
