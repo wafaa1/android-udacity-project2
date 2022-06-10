@@ -64,16 +64,21 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
 
 
 @BindingAdapter("pictureOfDayDescription")
-fun bindPictureOfDayDescription(imageView: ImageView, title:String) {
+fun bindPictureOfDayDescription(imageView: ImageView, title:String?) {
     imageView.context.getString(R.string.nasa_picture_of_day_content_description_format, title)
 }
 
-@BindingAdapter("listData")
-fun bindRecyclerView(
-    recyclerView: RecyclerView,
-    data: List<Asteroid>?
-) {
-    val adapter = recyclerView.adapter as AsteroidAdapter
-    adapter.submitList(data)
+//@BindingAdapter("listData")
+//fun bindRecyclerView(
+//    recyclerView: RecyclerView,
+//    list: List<Asteroid>?
+//) {
+//    val adapter = recyclerView.adapter as AsteroidAdapter
+//    adapter.submitList(list)
+//}
+@BindingAdapter("listData") // wafaa
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
+    val adapter = recyclerView.adapter as? AsteroidAdapter
+    adapter?.submitList(data)
 }
 

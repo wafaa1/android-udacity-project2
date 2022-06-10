@@ -16,18 +16,6 @@ data class NetworkPOD(
     val title: String,
     val url: String)
 
-///**
-// * Convert Network results to domain objects
-// */
-//fun NetworkPODContainer.asDomainModel(): PictureOfDay {
-//    return picOfDay.map {
-//        PictureOfDay(
-//            mediaType = it.mediaType,
-//            title = it.title,
-//            url = it.url
-//        )
-//    }
-//}
 /**
  * Convert Network results to domain objects
  */
@@ -38,19 +26,7 @@ fun NetworkPODContainer.asDomainModel(): PictureOfDay {
         url = picOfDay.url
     )
 }
-///**
-// * Convert Network results to database objects
-// */
-//fun NetworkPODContainer.asDatabaseModel(): DatabasePOD {
-//    return picOfDay.map {
-//        DatabasePOD(
-//            mediaType = it.mediaType,
-//            title = it.title,
-//            url = it.url,
-//            date = getTodayDate()
-//        )
-//    }
-//}
+
 /**
  * Convert Network results to database objects
  */
@@ -64,12 +40,5 @@ fun NetworkPODContainer.asDatabaseModel(): DatabasePOD {
         date = getTodayDate()
     )
 }
-//fun PictureOfDay.asDatabaseModel(): DatabasePOD {
-//    return DatabasePOD(
-//        mediaType = this.mediaType,
-//        title = this.title,
-//        url = this.url,
-//        date = Calendar.getInstance().time.toString() // pass the required date
-//    )
-//}
+
 

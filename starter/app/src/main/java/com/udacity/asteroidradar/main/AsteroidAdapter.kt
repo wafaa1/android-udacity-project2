@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.udacity.asteroidradar.database.DatabaseAsteroid
 import com.udacity.asteroidradar.databinding.AsteroidListItemBinding
 import com.udacity.asteroidradar.domain.Asteroid
 
@@ -31,7 +32,7 @@ class AsteroidAdapter(val onClickListener: OnClickListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AsteroidViewHolder {
-        return AsteroidAdapter.AsteroidViewHolder(
+        return AsteroidViewHolder(
             AsteroidListItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,

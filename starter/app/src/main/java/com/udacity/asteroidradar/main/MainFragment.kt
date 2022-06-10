@@ -24,7 +24,7 @@ import org.json.JSONObject
 
 class MainFragment : Fragment() {
 
-    private lateinit var binding: FragmentMainBinding
+//    private lateinit var binding: FragmentMainBinding
 
     /**
      * Lazily initialize our [MainViewModel].
@@ -36,49 +36,59 @@ class MainFragment : Fragment() {
         ViewModelProvider(this, MainViewModel.MainViewModelFactory(activity.application)).get(MainViewModel::class.java)
     }
 
-    private var viewModelAdapter: AsteroidAdapter? = null
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        viewModel.asteroidsList.observe(viewLifecycleOwner, Observer<List<Asteroid>> { asteroids ->
-//            asteroids?.apply {
-////                viewModelAdapter?. = asteroids
-//            }
-//        })
-//    }
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View {
 
-        val binding: FragmentMainBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_main, container, false
-        )
+//        val binding: FragmentMainBinding = DataBindingUtil.inflate(
+//            inflater, R.layout.fragment_main, container, false
+//        )
+
+        val binding = FragmentMainBinding.inflate(inflater)
+
         val application = requireNotNull(this.activity).application
         binding.setLifecycleOwner(viewLifecycleOwner)
 
         binding.viewModel = viewModel
 
-        binding.root.findViewById<RecyclerView>(R.id.asteroid_recycler).apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = viewModelAdapter
-        }
+        binding.asteroidRecycler.adapter = AsteroidAdapter(
+            AsteroidAdapter.OnClickListener {
+                viewModel.displayAsteroidDetails(it)
+            })
 
-            // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
-            binding.lifecycleOwner = this
+        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
+        binding.lifecycleOwner = this
 
-            // Giving the binding access to the MainViewModel
-            binding.viewModel = viewModel
+        // Giving the binding access to the MainViewModel
+        binding.viewModel = viewModel
 
 
-            setHasOptionsMenu(true)
+        viewModel.navigateToSelectedAsteroid.observe(this, Observer {
+            if ( null != it ) {
+                this.findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
+                viewModel.displayAsteroidDetailsComplete()
+            }
+        })
+
+
+//            setHasOptionsMenu(true)
 
             return binding.root
         }
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_overflow_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.main_overflow_menu, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        viewModel.updateFilter(
+//            when (item.itemId) {
+//                R.id.show_week_menu -> AsteroidApiFilter.SHOW_WEEK
+//                R.id.show_today_menu -> AsteroidApiFilter.SHOW_TODAY
+//                else -> AsteroidApiFilter.SHOW_SAVED
+//            }
+//        )
+//        return true
+//    }
 }
 
 
