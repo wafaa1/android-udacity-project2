@@ -1,26 +1,12 @@
 package com.udacity.asteroidradar.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.udacity.asteroidradar.R
-import com.udacity.asteroidradar.api.*
-import com.udacity.asteroidradar.database.AsteroidsDatabase
-import com.udacity.asteroidradar.database.asDomainModel
-import com.udacity.asteroidradar.databinding.AsteroidListItemBinding
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
-import com.udacity.asteroidradar.domain.Asteroid
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import org.json.JSONObject
 
 class MainFragment : Fragment() {
 
@@ -38,10 +24,6 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View {
-
-//        val binding: FragmentMainBinding = DataBindingUtil.inflate(
-//            inflater, R.layout.fragment_main, container, false
-//        )
 
         val binding = FragmentMainBinding.inflate(inflater)
 
@@ -69,26 +51,26 @@ class MainFragment : Fragment() {
             }
         })
 
-
-//            setHasOptionsMenu(true)
+            setHasOptionsMenu(true)
 
             return binding.root
         }
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.main_overflow_menu, menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        viewModel.updateFilter(
-//            when (item.itemId) {
-//                R.id.show_week_menu -> AsteroidApiFilter.SHOW_WEEK
-//                R.id.show_today_menu -> AsteroidApiFilter.SHOW_TODAY
-//                else -> AsteroidApiFilter.SHOW_SAVED
-//            }
-//        )
-//        return true
-//    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_overflow_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        viewModel.updateFilter(
+            when (item.itemId) {
+                R.id.show_week_menu -> MainViewModel.AsteroidFilter.SHOW_WEEK
+                R.id.show_today_menu -> MainViewModel.AsteroidFilter.SHOW_TODAY
+                else -> MainViewModel.AsteroidFilter.SHOW_SAVED
+            }
+        )
+        return true
+    }
 }
 
 

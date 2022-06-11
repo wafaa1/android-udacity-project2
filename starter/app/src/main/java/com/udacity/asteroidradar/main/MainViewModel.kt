@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application){
 
+    enum class AsteroidFilter(val value: String) { SHOW_WEEK("week"), SHOW_TODAY("today"), SHOW_SAVED("saved") }
+
     private val _navigateToSelectedAsteroid = MutableLiveData<Asteroid>()
     val navigateToSelectedAsteroid: LiveData<Asteroid>
         get() = _navigateToSelectedAsteroid
@@ -39,10 +41,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application){
         _navigateToSelectedAsteroid.value = null
     }
 
-//    fun updateFilter(filter: AsteroidFilter) {
-//        getMarsRealEstateProperties(filter)
-//    }
-
+    fun updateFilter(filter: AsteroidFilter) {
+        when (filter) {
+            AsteroidFilter.SHOW_TODAY -> asteroidsRepository.asteroidsToday
+            AsteroidFilter.SHOW_WEEK -> asteroidsRepository.asteroidsOfWeek
+            else -> {
+                asteroidsRepository.asteroidsOfWeek
+                }
+            }
+        }
 
     class MainViewModelFactory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -53,4 +60,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application){
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
-}
+
+
+
+    }
