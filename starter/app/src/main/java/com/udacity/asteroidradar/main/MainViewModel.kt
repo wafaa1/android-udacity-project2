@@ -9,7 +9,8 @@ import com.udacity.asteroidradar.repository.AsteroidRepository
 import com.udacity.asteroidradar.repository.PODRepository
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application, filter: AsteroidFilter) : AndroidViewModel(application){
+class MainViewModel(application: Application, private val filter: MutableLiveData<AsteroidFilter>) :
+    AndroidViewModel(application) {
 
     enum class AsteroidFilter(val value: String) { SHOW_WEEK("week"), SHOW_TODAY("today"), SHOW_SAVED("saved") }
 
@@ -30,7 +31,7 @@ class MainViewModel(application: Application, filter: AsteroidFilter) : AndroidV
         }
     }
 
-    val asteroidsList =
+    val asteroidsList = Transformations.switchMap(filter) { filter ->
         when (filter) {
             AsteroidFilter.SHOW_TODAY -> asteroidsRepository.asteroidsToday
             AsteroidFilter.SHOW_WEEK -> asteroidsRepository.asteroidsOfWeek
@@ -38,6 +39,7 @@ class MainViewModel(application: Application, filter: AsteroidFilter) : AndroidV
                 asteroidsRepository.asteroids
             }
         }
+    }
 
     val pictureOfDay = podRepository.pictureOfDay
 
@@ -49,21 +51,15 @@ class MainViewModel(application: Application, filter: AsteroidFilter) : AndroidV
         _navigateToSelectedAsteroid.value = null
     }
 
-    fun updateFilter(filter: AsteroidFilter) {
-        when (filter) {
-            AsteroidFilter.SHOW_TODAY -> asteroidsRepository.asteroidsToday
-            AsteroidFilter.SHOW_WEEK -> asteroidsRepository.asteroidsOfWeek
-            else -> {
-                asteroidsRepository.asteroids
-                }
-            }
-        }
+    fun updateFilter(filterToUpdate: AsteroidFilter) {
+        filter.value = filterToUpdate
+    }
 
-    class MainViewModelFactory(val app: Application) : ViewModelProvider.Factory {
+    class MainViewModelFactory(val app: Application, val filter: MutableLiveData<AsteroidFilter>) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return MainViewModel(app,AsteroidFilter.SHOW_SAVED) as T
+                return MainViewModel(app, filter) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
