@@ -9,7 +9,7 @@ import com.udacity.asteroidradar.repository.AsteroidRepository
 import com.udacity.asteroidradar.repository.PODRepository
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : AndroidViewModel(application){
+class MainViewModel(application: Application, filter: AsteroidFilter) : AndroidViewModel(application){
 
     enum class AsteroidFilter(val value: String) { SHOW_WEEK("week"), SHOW_TODAY("today"), SHOW_SAVED("saved") }
 
@@ -30,7 +30,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application){
         }
     }
 
-    val asteroidsList = asteroidsRepository.asteroids
+    val asteroidsList =
+        when (filter) {
+            AsteroidFilter.SHOW_TODAY -> asteroidsRepository.asteroidsToday
+            AsteroidFilter.SHOW_WEEK -> asteroidsRepository.asteroidsOfWeek
+            else -> {
+                asteroidsRepository.asteroids
+            }
+        }
+
     val pictureOfDay = podRepository.pictureOfDay
 
     fun displayAsteroidDetails(asteroid: Asteroid) {
@@ -55,7 +63,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application){
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return MainViewModel(app) as T
+                return MainViewModel(app,AsteroidFilter.SHOW_SAVED) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
