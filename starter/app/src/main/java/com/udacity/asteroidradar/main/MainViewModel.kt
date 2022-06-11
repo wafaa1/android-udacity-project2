@@ -46,7 +46,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application){
             AsteroidFilter.SHOW_TODAY -> asteroidsRepository.asteroidsToday
             AsteroidFilter.SHOW_WEEK -> asteroidsRepository.asteroidsOfWeek
             else -> {
-                asteroidsRepository.asteroidsOfWeek
+                asteroidsRepository.asteroids
                 }
             }
         }
