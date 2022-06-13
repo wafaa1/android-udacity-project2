@@ -19,7 +19,8 @@ class MainFragment : Fragment() {
         val activity = requireNotNull(this.activity){
             "You can only access the viewModel after onViewCreated()"
         }
-        ViewModelProvider(this, MainViewModel.MainViewModelFactory(activity.application, )).get(MainViewModel::class.java)
+        ViewModelProvider(this, MainViewModel.MainViewModelFactory(activity.application, MutableLiveData(
+            MainViewModel.AsteroidFilter.SHOW_WEEK) )).get(MainViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +45,7 @@ class MainFragment : Fragment() {
         binding.viewModel = viewModel
 
 
-        viewModel.navigateToSelectedAsteroid.observe(this, Observer {
+        viewModel.navigateToSelectedAsteroid.observe(viewLifecycleOwner, Observer {
             if ( null != it ) {
                 this.findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
                 viewModel.displayAsteroidDetailsComplete()
