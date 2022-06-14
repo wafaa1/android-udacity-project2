@@ -64,7 +64,4 @@ class MainViewModel(application: Application, private val filter: MutableLiveDat
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
-
-
-
-    }
+}

@@ -30,8 +30,6 @@ fun NetworkPODContainer.asDomainModel(): PictureOfDay {
 /**
  * Convert Network results to database objects
  */
-
-
 fun NetworkPODContainer.asDatabaseModel(): DatabasePOD {
     return DatabasePOD(
         mediaType = picOfDay.mediaType,

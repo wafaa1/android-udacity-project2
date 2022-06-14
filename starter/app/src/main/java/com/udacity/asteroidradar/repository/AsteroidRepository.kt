@@ -29,22 +29,6 @@ class AsteroidRepository (private val database: AsteroidsDatabase) {
             it?.asDomainModel()
         }
 
-
-//    val asteroids: LiveData<List<Asteroid>> =
-//        Transformations.map(
-//            when (filter) {
-//                MainViewModel.AsteroidFilter.SHOW_TODAY -> database.asteroidDao.getTodayAsteroids(
-//                    getTodayDate())
-//                MainViewModel.AsteroidFilter.SHOW_WEEK -> database.asteroidDao.getWeekAsteroids(
-//                    getTodayDate(),endAfter7Days)
-//                else -> {
-//                    database.asteroidDao.getAsteroids()
-//                }
-//            }
-//        ) {
-//            it?.asDomainModel()
-//        }
-
     suspend fun refreshAsteroids() {
         withContext(Dispatchers.IO) {
             val asteroidsList =

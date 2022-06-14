@@ -14,8 +14,6 @@ import retrofit2.http.Query
 
 private const val myNasaApiKey="VCknWcf7SocNnq9cuk5J25r1CDvdrtMV9YzdDEKF"
 
-//enum class AsteroidApiFilter(val value: String) { SHOW_WEEK("week"), SHOW_TODAY("today"), SHOW_SAVED("saved") }
-
 // Picture of Day
 interface PictureOfDayService {
     @GET(Constants.POD_ENDPOINT)
@@ -30,8 +28,6 @@ interface AsteroidsService {
         @Query("end_date") endDate: String?,
         @Query("api_key") apiKey: String = myNasaApiKey
     ): String
-//    ): Deferred<String>
-
 }
 
 // Moshi

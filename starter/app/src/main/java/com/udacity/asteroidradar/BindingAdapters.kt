@@ -1,6 +1,5 @@
 package com.udacity.asteroidradar
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
@@ -10,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.main.AsteroidAdapter
-import com.udacity.asteroidradar.main.MainViewModel
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -62,21 +60,12 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
     }
 }
 
-
 @BindingAdapter("pictureOfDayDescription")
 fun bindPictureOfDayDescription(imageView: ImageView, title:String?) {
     imageView.context.getString(R.string.nasa_picture_of_day_content_description_format, title)
 }
 
-//@BindingAdapter("listData")
-//fun bindRecyclerView(
-//    recyclerView: RecyclerView,
-//    list: List<Asteroid>?
-//) {
-//    val adapter = recyclerView.adapter as AsteroidAdapter
-//    adapter.submitList(list)
-//}
-@BindingAdapter("listData") // wafaa
+@BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
     val adapter = recyclerView.adapter as? AsteroidAdapter
     adapter?.submitList(data)

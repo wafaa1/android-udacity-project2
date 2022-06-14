@@ -1,6 +1,5 @@
 package com.udacity.asteroidradar.domain
 
-import android.net.Uri
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
